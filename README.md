@@ -4,7 +4,7 @@ ylog是一个简单的日志记录模块，以json格式记录程序日志，日
 
 # 例子
 
-```
+```go
 package main
 
 import (
@@ -15,7 +15,7 @@ func main(t *testing.T) {
 	ylog.Init(".")
 	ylog.SetDebug(true)
 	ylog.Debug("debug")
-	ylog.Error("error")
+	ylog.Error("error", ylog.M{'error': 111})
 	ylog.Warning("warning")
 	ylog.Info("info")
 	ylog.Close()
