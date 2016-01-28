@@ -9,6 +9,10 @@ import (
 
 var gLogger *L
 
+func init() {
+	gLogger = nil
+}
+
 // Init 初始化全局日志
 func Init(dir string) {
 	l, err := New(dir)
@@ -20,32 +24,45 @@ func Init(dir string) {
 
 // Close 关闭全局日志系统
 func Close() {
-	gLogger.Close()
+	if gLogger != nil {
+		gLogger.Close()
+		gLogger = nil
+	}
 }
 
 // Info 在全局日志中输出信息
 func Info(msg string, data ...interface{}) {
-	gLogger.Info(msg, data...)
+	if gLogger != nil {
+		gLogger.Info(msg, data...)
+	}
 }
 
 // Warning 在全局日志中输出警告信息
 func Warning(msg string, data ...interface{}) {
-	gLogger.Warning(msg, data...)
+	if gLogger != nil {
+		gLogger.Warning(msg, data...)
+	}
 }
 
 // Error 在全局日志中输出错误信息
 func Error(msg string, data ...interface{}) {
-	gLogger.Error(msg, data...)
+	if gLogger != nil {
+		gLogger.Error(msg, data...)
+	}
 }
 
 // Debug 在全局日志中输出调试信息
 func Debug(msg string, data ...interface{}) {
-	gLogger.Debug(msg, data...)
+	if gLogger != nil {
+		gLogger.Debug(msg, data...)
+	}
 }
 
 // SetDebug 全局日志开启或关闭调试信息的输出
 func SetDebug(debug bool) {
-	gLogger.SetDebug(debug)
+	if gLogger != nil {
+		gLogger.SetDebug(debug)
+	}
 }
 
 // M 日志数据
